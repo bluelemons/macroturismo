@@ -1,0 +1,15 @@
+<h1>Agencias</h1>
+
+<ul>
+  <% agencias.each do |agencia| %>
+    <li> <%= p agencia %>
+  <% end %>
+</ul>
+
+<h2>Nueva Agencia</h2>
+
+<form method="post">
+  <label>Nombre: <input name="nombre"></label>
+  <label>CUIT: <input name="cuit"></label>
+  <button>Agregar</button>
+</form>

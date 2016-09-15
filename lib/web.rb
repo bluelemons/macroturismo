@@ -2,18 +2,24 @@ require 'cuba'
 require 'cuba/safe'
 require 'cuba/render'
 require 'erb'
+require 'pry'
 
 Cuba.plugin Cuba::Safe
 Cuba.plugin Cuba::Render
 
+Agencias = []
+
 Cuba.define do
-  on get do
-    on 'hello' do
-      render('hello')
+  on 'agencias' do
+    on get do
+      render('agencias', agencias: Agencias)
     end
 
-    on root do
-      res.redirect '/hello'
+    on post do
+      params = req.params
+      Agencias << { nombre: params.fetch('nombre'),
+                    cuit: params.fetch('cuit') }
+      res.redirect '/agencias'
     end
   end
 end
