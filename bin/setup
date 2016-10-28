@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -x
+
+# functions
+
+available () {
+  which $1 > /dev/null
+}
+
+# main script
+
+echo <<EOS
+Advertencia, esto va a instalar gemas utilizando 'gem install' deberá tener
+instalado algún tipo de gemset para evitar que se instale todo junto.
+EOS
+
+read -p "Desea continuar la instalación? (por defecto no) " answer
+
+case ${answer:0:1} in
+  y|Y|s|S ) echo Installing ;;
+  * ) echo Cancelado por el usuario
+      exit 1 ;;
+esac
+
+available dep || gem install dep
+
+dep || dep install
